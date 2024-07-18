@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('./assets/fonts/MonaSans-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mona Sans Bold';
+  src: url('./assets/fonts/MonaSans-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
