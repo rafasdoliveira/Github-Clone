@@ -34,14 +34,17 @@ const navItems = [
   },
 ];
 
-const MainNav: React.FC = () => {
+const Nav: React.FC = () => {
   return (
-    <nav className="gap-2 flex items-end mb-3 ">
+    <nav className="gap-5 flex items-end mb-3 ">
       {navItems.map((item, index) => (
-        <div key={index} className=" cursor-pointer">
+        <div
+          key={index}
+          className="cursor-pointer hover:bg-mainNavHover hover:rounded-md duration-200 ease-in-out"
+        >
           <Link
             to={item.to}
-            className="flex items-center gap-2 p-2 text-sm hover:bg-mainNavHover hover:rounded-md duration-300 ease-in-out"
+            className="flex items-center gap-2 p-2 text-sm cursor-pointer"
           >
             <span>{item.icon}</span>
             <span>{item.label}</span>
@@ -52,4 +55,4 @@ const MainNav: React.FC = () => {
   );
 };
 
-export default MainNav;
+export default Nav;

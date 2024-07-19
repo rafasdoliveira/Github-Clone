@@ -1,12 +1,18 @@
 import React from 'react';
-import Header from '../components/Header/Header';
-import Main from '../components/Main/Main';
+import Header from '../components/header/Header';
+import NavContainer from '../components/nav/NavContainer';
+import Profile from '../components/profile/profile';
 
 const Home: React.FC = () => {
   return (
-    <div className="h-screen">
+    <div className="bg-profileBg">
       <Header />
-      <Main />
+      <main className="">
+        <NavContainer />
+        <div className="z-10 translate-x-28 -translate-y-8">
+          <Profile />
+        </div>
+      </main>
     </div>
   );
 };
