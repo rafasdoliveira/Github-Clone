@@ -6,6 +6,7 @@ import Profile from '../components/profile/profile';
 const Home: React.FC = () => {
   return (
     <div className="bg-profileBg">
+      {/* teste */}
       <Header />
       <main className="">
         <NavContainer />
