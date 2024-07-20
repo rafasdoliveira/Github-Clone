@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/header/Header';
+import Header from '../components/header/header';
 import NavContainer from '../components/nav/NavContainer';
 import Profile from '../components/profile/profile';
-import RepositoriesHome from '../components/repositoriesHome/RepositoriesHome';
+import RepositoriesHome from '../components/repositoriesHome/repositoriesHome';
 
 const Home: React.FC = () => {
   return (
