@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/header/Header';
 import NavContainer from '../components/nav/NavContainer';
 import Profile from '../components/profile/profile';
-import RepositoriesHome from '../components/repositoriesHome/repositoriesHome';
+import RepositoriesHome from '../components/repositoriesHome/RepositoriesHome';
 
 const Home: React.FC = () => {
   return (
@@ -10,11 +10,11 @@ const Home: React.FC = () => {
       <Header />
       <main className="">
         <NavContainer />
-        <div className="border-2 border-red-500 flex">
+        <div className="flex">
           <div className="z-10 translate-x-28 -translate-y-8">
             <Profile />
           </div>
-          <div className="border-2 translate-x-36  w-full  border-red-500">
+          <div className="border-2 translate-x-36  w-full">
             <RepositoriesHome />
           </div>
         </div>
