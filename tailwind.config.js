@@ -9,6 +9,7 @@ export default {
         mainNavHover: '#21262c',
         profileBg: '#0d1118',
         profileCardBg: '#0d1116',
+        profileDetails: '#e6edf3',
         border: '#252b32',
         userText: '#8d96a0',
         followHover: '#4593f8',
@@ -17,6 +18,9 @@ export default {
         followButtonHover: '#292e36',
         followButtonBorder: '#30363d',
         proText: '#ab7df8',
+        repoNameHome: '#4088e6',
+        repoTypeHome: '#656c74',
+        repoDescText: '#838b95',
       },
       fontFamily: {
         sans: ['Mona Sans', 'Mona Sans Bold'],
