@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import getUser from '../../services/services/UserService';
 import Arctic from '../../assets/arctic.png';
 import PullShark from '../../assets/pull-shark.png';
 import Yolo from '../../assets/yolo.png';
@@ -32,21 +33,63 @@ const Profile: React.FC<ProfileProps> = ({
   location,
   email,
 }) => {
+  const [userData, setUserData] = useState<ProfileProps | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getUser('rafasdoliveira');
+        const mappedUser: ProfileProps = {
+          avatar: user.avatar_url,
+          name: user.name || '',
+          username: user.login,
+          bio: user.bio,
+          followers: user.followers ? user.followers.toString() : '0',
+          following: user.following ? user.following.toString() : '0',
+          company: user.company,
+          location: user.location,
+          email: user.email,
+        };
+
+        setUserData(mappedUser);
+      } catch (error) {
+        console.error('Erro ao carregar usuário inicial', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const profile = userData || {
+    avatar,
+    name,
+    username,
+    bio,
+    followers,
+    following,
+    company,
+    location,
+    email,
+  };
+
   return (
     <div className="text-white w-[296px] h-full">
       <div className="w-[296px]">
         <img
           className="rounded-full"
           src={
-            avatar || 'https://avatars.githubusercontent.com/u/170582363?v=4'
+            profile.avatar ||
+            'https://avatars.githubusercontent.com/u/170582363?v=4'
           }
-          alt={name}
+          alt={profile.name}
         />
         <div className="mt-4">
-          <h1 className="font-sans-bold font-bold text-2xl">{name}</h1>
-          <span className="text-userText text-xl">{username}</span>
-          {bio && (
-            <div className="mt-3 text-base text-profileDetails">{bio}</div>
+          <h1 className="font-sans-bold font-bold text-2xl">{profile.name}</h1>
+          <span className="text-userText text-xl">{profile.username}</span>
+          {profile.bio && (
+            <div className="mt-3 text-base text-profileDetails">
+              {profile.bio}
+            </div>
           )}
           <div className="flex justify-center w-full mt-4 bg-followButton border border-followButtonBorder rounded-md cursor-pointer hover:bg-followButtonHover duration-300 ease-in-out">
             <button className="w-full h-8 text-sm font-bold text-followButtonText">
@@ -59,36 +102,36 @@ const Profile: React.FC<ProfileProps> = ({
                 <LuUsers2 />
               </span>
               <div className="flex gap-1">
-                <span>{followers}</span>
+                <span>{profile.followers}</span>
                 <span>followers</span>
               </div>
             </div>
             <LuDot className="text-userText" />
             <div className="flex gap-1 items-center hover:text-followHover">
-              <span>{following}</span>
+              <span>{profile.following}</span>
               <span>following</span>
             </div>
           </div>
-          {company && (
+          {profile.company && (
             <div className="mt-6 text-sm">
               <div className="mb-1 flex items-center gap-2">
                 <span>
                   <IoBusinessOutline />
                 </span>
-                <span>{company}</span>
+                <span>{profile.company}</span>
               </div>
-              {location && (
+              {profile.location && (
                 <div className="mb-1 flex items-center gap-2">
                   <span>
                     <FaLocationDot />
                   </span>
-                  <span>{location}</span>
+                  <span>{profile.location}</span>
                 </div>
               )}
-              {email && (
+              {profile.email && (
                 <div className="mb-1 flex items-center gap-2">
                   <span>{<MdOutlineMailOutline />}</span>
-                  <span>{email}</span>
+                  <span>{profile.email}</span>
                 </div>
               )}
             </div>

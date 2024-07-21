@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/header/Header';
 import NavContainer from '../components/nav/NavContainer';
 import Profile from '../components/profile/Profile';
-import RepositoriesHome from '../components/repositoriesHome/RepositoriesHome';
 
 const userProfile = {
   avatar: 'https://avatars.githubusercontent.com/u/170582363?v=4',
@@ -24,16 +23,15 @@ const userProfile = {
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-profileBg min-h-screen">
+    <div className="bg-profileBg w-full min-h-screen">
       <Header />
-      <main className="flex flex-col">
-        <NavContainer />
+      <main className="flex flex-col min-h-screen h-full">
         <div className="flex flex-1">
-          <div className="z-10 translate-x-28 -translate-y-8">
+          <div className="z-5 translate-x-28 translate-y-10">
             <Profile {...userProfile} />
           </div>
-          <div className="translate-x-36">
-            <RepositoriesHome />
+          <div className="translate-x-32 min-h-screen ">
+            <NavContainer />
           </div>
         </div>
       </main>

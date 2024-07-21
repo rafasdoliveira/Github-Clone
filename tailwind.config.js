@@ -21,6 +21,7 @@ export default {
         repoNameHome: '#4088e6',
         repoTypeHome: '#656c74',
         repoDescText: '#838b95',
+        newRepoButton: '#238636',
       },
       fontFamily: {
         sans: ['Mona Sans', 'Mona Sans Bold'],

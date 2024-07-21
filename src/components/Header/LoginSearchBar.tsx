@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import SearchInput from '../common/SearchInput';
 
 const LoginSearchBar: React.FC = () => {
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [search, setSearch] = useState('');
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleCloseSearch = () => {
+    setSearch('');
+    setIsSearchVisible(false);
+  };
+
   return (
-    <div className="flex items-center justify-end gap-5 w-full">
-      <button className="flex items-center justify-between p-1 border border-gray-500 rounded-md h-8 w-80 text-sm text-headerSearchFont">
+    <div className="relative flex items-center justify-end gap-5 w-full">
+      <button
+        className="flex items-center justify-between p-1 border border-gray-500 rounded-md h-8 w-80 text-sm text-headerSearchFont"
+        onClick={() => setIsSearchVisible(!isSearchVisible)}
+      >
         <div className="flex items-center gap-2">
           <FaSearch className="ml-2 text-gray-500" />
           <span>Search or jump to...</span>
@@ -14,6 +30,14 @@ const LoginSearchBar: React.FC = () => {
           /
         </div>
       </button>
+      {isSearchVisible && (
+        <SearchInput
+          placeholder="Search"
+          value={search}
+          onChange={handleSearchChange}
+          onClose={handleCloseSearch}
+        />
+      )}
       <div className="flex items-center justify-between w-36 text-sm">
         <div className="hover:text-gray-300">
           <Link to="https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fjeosafaferreira">

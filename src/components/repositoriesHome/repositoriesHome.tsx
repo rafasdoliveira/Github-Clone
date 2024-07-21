@@ -1,66 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import getUserRepos from '../../services/services/RepoService';
 import CardRepositorieHome from './CardRepositorieHome';
 
-const REPOSITORIES = [
-  {
-    repo_name: 'trashreport1',
-    repo_description: '',
-    repo_type: 'Public',
-    repo_language: 'JavaScript',
-    repo_stars: '1',
-  },
-  {
-    repo_name: 'ifce',
-    repo_description: '',
-    repo_type: 'Public',
-    repo_language: 'C',
-    repo_stars: '',
-  },
-  {
-    repo_name: 'agility-sec',
-    repo_description: '',
-    repo_type: 'Public',
-    repo_language: 'Java',
-    repo_stars: '',
-  },
-  {
-    repo_name: 'agility-update',
-    repo_description: 'Sistema de atualização do Agility Secretaria',
-    repo_type: 'Public',
-    repo_language: 'Java',
-    repo_stars: '',
-  },
-  {
-    repo_name: 'batalha-naval',
-    repo_description: 'Jogo de batalha naval desenvolvido na linguagem C',
-    repo_type: 'Public',
-    repo_language: 'JavaScript',
-    repo_stars: '',
-  },
-  {
-    repo_name: 'trashreport6',
-    repo_description: '',
-    repo_type: 'Public',
-    repo_language: 'JavaScript',
-    repo_stars: '',
-  },
-];
+interface Repository {
+  id: number;
+  name: string;
+  html_url: string;
+  description: string;
+  updated_at: string;
+  language: string;
+  visibility: string;
+  stargazers_count: number;
+}
 
 const RepositoriesHome: React.FC = () => {
+  const [repositoriesData, setRepositoriesData] = useState<Repository[]>([]);
+
+  useEffect(() => {
+    const fetchRepositories = async () => {
+      try {
+        const repositories = await getUserRepos('rafasdoliveira');
+        setRepositoriesData(repositories);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchRepositories();
+  }, []);
+
+  const displayedRepos = repositoriesData.slice(0, 6);
+
   return (
     <div className="w-full h-[450px] text-white mt-6 ml-2">
-      <div className="">
+      <div>
         <h3 className="text-base">Popular repositories</h3>
       </div>
       <div className="h-[377px] grid grid-cols-2 mt-2">
-        {REPOSITORIES.map((repo, index) => (
+        {displayedRepos.map(repo => (
           <CardRepositorieHome
-            key={index}
-            repo_name={repo.repo_name}
-            repo_description={repo.repo_description}
-            repo_type={repo.repo_type}
-            repo_language={repo.repo_language}
-            repo_stars={repo.repo_stars}
+            key={repo.id}
+            repo_name={repo.name}
+            repo_description={repo.description}
+            repo_type={repo.visibility}
+            repo_language={repo.language}
+            repo_stars={repo.stargazers_count}
           />
         ))}
       </div>
