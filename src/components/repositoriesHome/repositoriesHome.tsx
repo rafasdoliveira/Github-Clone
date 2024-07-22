@@ -32,7 +32,7 @@ const RepositoriesHome: React.FC = () => {
   const displayedRepos = repositoriesData.slice(0, 6);
 
   return (
-    <div className="w-full h-[450px] text-white mt-6 ml-2">
+    <div className="w-full h-[450px] text-white ml-2 ">
       <div>
         <h3 className="text-base">Popular repositories</h3>
       </div>

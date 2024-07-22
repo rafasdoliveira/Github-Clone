@@ -15,14 +15,13 @@ const NavContainer: React.FC = () => {
   };
 
   return (
-    <div className="px-3 px-md-4 px-lg-5 h-14 bg-profileBg text-white mt-6 z-[3]">
-      <div className="flex h-full">
-        <div className="h-full"></div>
-        <div className="w-8/12 flex h-full">
+    <div className="px-3 px-md-4 px-lg-5 min-h-[56px] bg-profileBg text-white mt-6 z-[3]">
+      <div className="flex">
+        <div className="w-full">
           <Nav onNavItemClick={handleNavItemClick} />
         </div>
       </div>
-      <div className="mt-4 w-[900px]">
+      <div className="mt-4 w-full">
         {activeComponent === 'overview' && <Overview />}
         {activeComponent === 'repositories' && <Repositories />}
       </div>

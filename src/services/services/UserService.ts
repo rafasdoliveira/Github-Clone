@@ -1,5 +1,4 @@
 import axiosInstance from '../api/baseURL';
-
 interface User {
   email: string;
   company: string | undefined;

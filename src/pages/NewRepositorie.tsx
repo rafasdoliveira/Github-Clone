@@ -37,6 +37,13 @@ const NewRepository: React.FC = () => {
     e.preventDefault();
     localStorage.setItem('form', JSON.stringify(form));
     alert('Repositório salvo!');
+
+    setForm({
+      repoName: '',
+      repoDescription: '',
+      repoVisibility: '',
+    });
+
     navigate('/');
   };
 

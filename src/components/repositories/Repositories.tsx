@@ -44,7 +44,7 @@ const Repositories: React.FC = () => {
       <div className="">
         <RepositoriesFilter />
       </div>
-      <div className="h-full h-max-[2000px] overflow-auto">
+      <div className="h-full h-max-[4000px] overflow-auto">
         {repositoriesData.map(repo => (
           <RepositoriesList
             id={repo.id}

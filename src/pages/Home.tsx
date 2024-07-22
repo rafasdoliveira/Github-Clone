@@ -23,15 +23,17 @@ const userProfile = {
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-profileBg w-full min-h-screen">
+    <div className="bg-profileBg w-full min-h-screen flex flex-col">
       <Header />
-      <main className="flex flex-col min-h-screen h-full">
+      <main className="flex flex-1">
         <div className="flex flex-1">
-          <div className="z-5 translate-x-28 translate-y-10">
-            <Profile {...userProfile} />
-          </div>
-          <div className="translate-x-32 min-h-screen ">
-            <NavContainer />
+          <div className="flex">
+            <div className="z-5 translate-x-28 mt-10">
+              <Profile {...userProfile} />
+            </div>
+            <div className="translate-x-32 w-[1000px] mt-10 flex-grow ">
+              <NavContainer />
+            </div>
           </div>
         </div>
       </main>

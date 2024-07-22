@@ -4,8 +4,8 @@ import Contributions from '../contributions/Contributions';
 
 const Overview: React.FC = () => {
   return (
-    <div className=" bg-profileBg">
-      <div className="">
+    <div className="bg-profileBg flex flex-col">
+      <div className="flex-grow">
         <RepositoriesHome />
       </div>
       <div className="">
