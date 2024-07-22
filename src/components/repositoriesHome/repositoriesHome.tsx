@@ -31,7 +31,7 @@ const RepositoriesHome: React.FC = () => {
     };
 
     fetchRepositories();
-  }, []);
+  }, [selectedUser]);
 
   const displayedRepos = repositoriesData.slice(0, 6);
 

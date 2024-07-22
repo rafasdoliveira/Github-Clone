@@ -40,7 +40,7 @@ const Repositories: React.FC = () => {
     };
 
     fetchRepositories();
-  }, []);
+  }, [selectedUser]);
 
   return (
     <div className="w-full h-full text-white mt-6 ml-2">
