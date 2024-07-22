@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { DateFormatter } from '../../utils/Formatter';
+import { useSelectedUser } from '../../context/SelectedUserContext';
 import RepositoriesFilter from './RepositoriesFilter';
 import RepositoriesList from './RepositoriesList';
 import getUserRepos from '../../services/services/RepoService';
-import { DateFormatter } from '../../utils/Formatter';
-import { useSelectedUser } from '../../context/SelectedUserContext';
 
 interface Repository {
   id: number;

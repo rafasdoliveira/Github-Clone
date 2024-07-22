@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelectedUser } from '../../context/SelectedUserContext';
 import getUserRepos from '../../services/services/RepoService';
 import CardRepositorieHome from './CardRepositorieHome';
 
@@ -15,11 +16,14 @@ interface Repository {
 
 const RepositoriesHome: React.FC = () => {
   const [repositoriesData, setRepositoriesData] = useState<Repository[]>([]);
+  const { selectedUser } = useSelectedUser();
 
   useEffect(() => {
+    const user = selectedUser || 'rafasdoliveira';
+
     const fetchRepositories = async () => {
       try {
-        const repositories = await getUserRepos('rafasdoliveira');
+        const repositories = await getUserRepos(user);
         setRepositoriesData(repositories);
       } catch (error) {
         console.log(error);
