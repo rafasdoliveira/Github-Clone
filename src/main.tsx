@@ -5,17 +5,17 @@ import App from './App.tsx';
 import NewRepositorie from './pages/NewRepositorie.tsx';
 import './index.css';
 
-import { UserProvider } from './context/UserContext.tsx';
+import { SelectedUserProvider } from './context/SelectedUserContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
+      <SelectedUserProvider>
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/newrepository" element={<NewRepositorie />} />
         </Routes>
-      </UserProvider>
+      </SelectedUserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

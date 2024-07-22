@@ -9,6 +9,7 @@ import { FaRegStar } from 'react-icons/fa';
 import { IoBusinessOutline } from 'react-icons/io5';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdOutlineMailOutline } from 'react-icons/md';
+import { useSelectedUser } from '../../context/SelectedUserContext';
 
 interface ProfileProps {
   avatar?: string;
@@ -34,21 +35,30 @@ const Profile: React.FC<ProfileProps> = ({
   email,
 }) => {
   const [userData, setUserData] = useState<ProfileProps | null>(null);
+  const { selectedUser } = useSelectedUser();
 
   useEffect(() => {
     const fetchUser = async () => {
+      const user = selectedUser || 'rafasdoliveira';
+
       try {
-        const user = await getUser('rafasdoliveira');
+        const userData = sessionStorage.getItem(user);
+        console.log(userData);
+        const fetchedUser = await getUser(user);
         const mappedUser: ProfileProps = {
-          avatar: user.avatar_url,
-          name: user.name || '',
-          username: user.login,
-          bio: user.bio,
-          followers: user.followers ? user.followers.toString() : '0',
-          following: user.following ? user.following.toString() : '0',
-          company: user.company,
-          location: user.location,
-          email: user.email,
+          avatar: fetchedUser.avatar_url,
+          name: fetchedUser.name || '',
+          username: fetchedUser.login,
+          bio: fetchedUser.bio,
+          followers: fetchedUser.followers
+            ? fetchedUser.followers.toString()
+            : '0',
+          following: fetchedUser.following
+            ? fetchedUser.following.toString()
+            : '0',
+          company: fetchedUser.company,
+          location: fetchedUser.location,
+          email: fetchedUser.email,
         };
 
         setUserData(mappedUser);
@@ -58,7 +68,7 @@ const Profile: React.FC<ProfileProps> = ({
     };
 
     fetchUser();
-  }, []);
+  }, [selectedUser]);
 
   const profile = userData || {
     avatar,

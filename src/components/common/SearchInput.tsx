@@ -24,7 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const [input, setInput] = useState<string>('');
   const ref = useRef<HTMLDivElement>(null);
 
-  useClickOutside(ref, onClose);
+  // useClickOutside(ref, onClose);
 
   const fetchData = (value: string) => {
     fetch(`https://api.github.com/users/${value}`)
@@ -32,6 +32,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       .then((json: User) => {
         const results = json && json.name ? [json] : [];
         console.log(results);
+        sessionStorage.setItem('results', JSON.stringify(results));
         setResults(results);
       })
       .catch(error => {

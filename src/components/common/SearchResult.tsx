@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelectedUser } from '../../context/SelectedUserContext';
 
 interface SearchResultProps {
   result: string;
@@ -9,8 +10,10 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   result,
   onClose,
 }) => {
+  const { setSelectedUser } = useSelectedUser();
+
   const handleResultClick = () => {
-    sessionStorage.setItem('selectedUser', result);
+    setSelectedUser(result);
     onClose();
   };
 
