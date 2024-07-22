@@ -4,6 +4,7 @@ import useClickOutside from '../../hooks/useClickOutside';
 
 interface User {
   name: string;
+  login: string;
 }
 
 interface SearchResultsListProps {
@@ -27,7 +28,7 @@ const SearchResultsList: React.FC<SearchResultsListProps> = ({
       <div className="p-4">
         {results.length > 0 ? (
           results.map((result, index) => (
-            <SearchResult result={result.name} key={index} onClose={onClose} />
+            <SearchResult result={result.login} key={index} onClose={onClose} />
           ))
         ) : (
           <p className="text-gray-500">No results found.</p>
