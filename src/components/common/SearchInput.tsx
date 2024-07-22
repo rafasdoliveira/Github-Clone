@@ -1,12 +1,17 @@
-import React, { useState, useRef, ChangeEvent, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  ChangeEvent,
+  useEffect,
+  useCallback,
+} from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { IoCloseCircle } from 'react-icons/io5';
-import useClickOutside from '../../hooks/useClickOutside';
+// import useClickOutside from '../../hooks/useClickOutside';
 
 interface User {
   name: string;
 }
-
 interface SearchInputProps {
   setResults: (results: User[]) => void;
   placeholder?: string;
@@ -18,7 +23,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   placeholder,
   onClose,
   setResults,
-  value,
+  // value,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [input, setInput] = useState<string>('');
@@ -26,33 +31,35 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
   // useClickOutside(ref, onClose);
 
-  const fetchData = (value: string) => {
-    fetch(`https://api.github.com/users/${value}`)
-      .then(response => response.json())
-      .then((json: User) => {
-        const results = json && json.name ? [json] : [];
-        console.log(results);
-        sessionStorage.setItem('results', JSON.stringify(results));
-        setResults(results);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setResults([]);
-      });
-  };
+  const fetchData = useCallback(
+    (value: string) => {
+      fetch(`https://api.github.com/users/${value}`)
+        .then(response => response.json())
+        .then((json: User) => {
+          const results = json && json.name ? [json] : [];
+          console.log(results);
+          sessionStorage.setItem('results', JSON.stringify(results));
+          setResults(results);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          setResults([]);
+        });
+    },
+    [setResults]
+  );
 
   useEffect(() => {
-    fetchData(input);
-  }, []);
+    if (input) {
+      fetchData(input);
+    } else {
+      setResults([]);
+    }
+  }, [input, fetchData, setResults]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInput(value);
-    if (value) {
-      fetchData(value);
-    } else {
-      setResults([]);
-    }
   };
 
   return (

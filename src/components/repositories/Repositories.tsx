@@ -3,6 +3,7 @@ import RepositoriesFilter from './RepositoriesFilter';
 import RepositoriesList from './RepositoriesList';
 import getUserRepos from '../../services/services/RepoService';
 import { DateFormatter } from '../../utils/Formatter';
+import { useSelectedUser } from '../../context/SelectedUserContext';
 
 interface Repository {
   id: number;
@@ -17,11 +18,13 @@ interface Repository {
 
 const Repositories: React.FC = () => {
   const [repositoriesData, setRepositoriesData] = useState<Repository[]>([]);
+  const { selectedUser } = useSelectedUser();
 
   useEffect(() => {
+    const user = selectedUser || 'rafasdoliveira';
     const fetchRepositories = async () => {
       try {
-        const repositories = await getUserRepos('rafasdoliveira');
+        const repositories = await getUserRepos(user);
         const repositoryFormatter = repositories.map(item => {
           const formattedDate = DateFormatter(item.updated_at);
           return {
